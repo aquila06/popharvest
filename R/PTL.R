@@ -335,19 +335,19 @@ PTL <- function(full.option = FALSE,
                               || !is.null(sd.Rmax))){
     stop("'Rmax.fixed' argument and 'Rmax' arguments for normal distribution can not be specified together")
   }
-  if(!is.null(Rmax.fixed)
+  if((!is.null(Rmax.fixed) # 2022-07-22 added a '(' for the first batch of conditions
      || isTRUE(Rmax.lognorm)
      || !is.null(mean.Rmax)
-     || !is.null(sd.Rmax) && (!is.null(lambdaMax.fixed)
+     || !is.null(sd.Rmax)) && (!is.null(lambdaMax.fixed)
                               || isTRUE(lambdaMax.lognorm)
                               || !is.null(mean.lambdaMax)
                               || !is.null(sd.lambdaMax))){
     stop("'Rmax' arguments and 'Lambdamax' arguments can not be specified together")
   }
-  if(!is.null(Rmax.fixed)
+  if((!is.null(Rmax.fixed)  # 2022-07-22 added a '(' for the first batch of conditions
      || isTRUE(Rmax.lognorm)
      || !is.null(mean.Rmax)
-     || !is.null(sd.Rmax) && !is.null(living.rate)){
+     || !is.null(sd.Rmax)) && !is.null(living.rate)){
     stop("'Rmax' arguments and 'living.rate' arguments can not be specified together")
   }
   if((!is.null(Rmax.fixed)
@@ -389,7 +389,7 @@ PTL <- function(full.option = FALSE,
                                    || !is.null(sd.lambdaMax))){
     stop("'lambdaMax.fixed' and 'lambdaMax' arguments for normal distribution can not be specified together")
   }
-  if((!is.null(lambdaMax.fixed)
+  if((!is.null(lambdaMax.fixed) 
      || isTRUE(lambdaMax.lognorm)
      || !is.null(mean.lambdaMax)
      || !is.null(sd.lambdaMax)) && !is.null(living.rate)){
@@ -816,7 +816,7 @@ PTL <- function(full.option = FALSE,
                          mass.fixed = mass.fixedT,
                          mass.lognorm = FALSE,
                          mean.mass = mean.massT,
-                         sd.mass = mean.massT,
+                         sd.mass = sd.massT, #modified the 2022-07-22 (mean.massT changed to sd.massT)
                          type.p = type.pT,
                          type.e = type.eT,
                          surv.j = surv.jT,
