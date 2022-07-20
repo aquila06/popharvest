@@ -109,7 +109,7 @@ rmax <- function (Nsim = 1,
     alpha.param <- MOM.lognorm(mean.alpha, sd.alpha)
     alpha.calc <- rlnorm(Nsim, alpha.param[1], alpha.param[2]) # 'Nsim' values are extracted from a log-normal distribution with with the mean 'mean.alpha' and the standard deviation 'sd.alpha'
   }
-  if(!is.null(alpha.fixed)) { # 2022-07-22 changed !is.na to !is.null as the default value is NULL (and not NA)
+  if(!is.na(alpha.fixed)) { 
     alpha.calc <- rep(alpha.fixed, Nsim)
   }
   if(!isTRUE(alpha.unif) && !isTRUE(alpha.lognorm) && is.na(alpha.fixed) && !is.na(max.alpha)){
@@ -120,10 +120,10 @@ rmax <- function (Nsim = 1,
 
 
   ## survival estimation ----
-  if(!is.null(surv.fixed)){ # 2022-07-22 changed !is.na to !is.null as the default value is NULL (and not NA) # If the value of surv.fixed is different to 'NA' (i.e. the value of surv.fixed is known) then :
+  if(!is.na(surv.fixed)){ # 2022-07-22 changed !is.na to !is.null as the default value is NULL (and not NA) # If the value of surv.fixed is different to 'NA' (i.e. the value of surv.fixed is known) then :
     survival.calc <- rep(surv.fixed, Nsim) # The value of surv.fixed is replicated 'Nsim' times and saves in the object 'survival.calc'
   }
-  if(!is.null(mass.fixed)){ # 2022-07-22 changed !is.na to !is.null as the default value is NULL (and not NA) # If the value of mass.fixed is different to 'NA' (i.e. the value of the body mass is known) then :
+  if(!is.na(mass.fixed)){ # 2022-07-22 changed !is.na to !is.null as the default value is NULL (and not NA) # If the value of mass.fixed is different to 'NA' (i.e. the value of the body mass is known) then :
     survival.tab <- surv(Nsim, mass.fixed = mass.fixed, alpha = alpha.calc, type.p = type.p, type.e = type.e, surv.j = surv.j) # The values of survival are calculated from the surv function and save in a data frame named 'survival.tab'
     survival.calc <- survival.tab$survival # The values of survival are extract from the data frame survival.tab and save in the object 'survival.calc'
   }
